@@ -1,0 +1,28 @@
+
+<div>
+      <a class="hiddenanchor" id="signup"></a>
+      
+
+      <div class="login_wrapper">
+        <div class="animate form login_form">
+          <section class="login_content">
+             <%= form_for(resource, as: resource_name, url: session_path(resource_name), role: "form") do |f| %>
+
+              <h1>Login Usuário</h1>
+              <div>
+                 <%= f.email_field :email, autofocus: false, placeholder: "Insira seu email", class: "form-control" %>
+               </div>
+              <div>
+                <%= f.password_field :password, placeholder: "Insira sua senha", class: "form-control"%>
+                </div>
+              <div>
+               <%= f.submit "Entrar", class: "btn btn-outline-secondary submit", style:"float: none; margin-left: 0px; width: 50%;" %>
+              </div>
+
+                <br />
+                 <% end %>
+            
+          </section>
+        </div>
+       </div>
+</div>

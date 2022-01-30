@@ -1,0 +1,46 @@
+<div class="col-lg-12">
+    <h1 class="page-header"> <%= "#{action_message} Questões" %></h1>
+          <% if @question.errors.any? %>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+              </button>
+                <ul>
+                    <% @question.errors.full_messages.each do |message| %>
+                  <li> <%= message %> </li>
+                  <% end %>
+                </ul>
+            </div>
+          <% end %>
+      <div class="panel-body">
+      <div class="row">
+      
+          <div class="col-lg-6">
+             <%= form_with(model: [:admins_backoffice, @question], local: true) do |form| %>
+        
+            <div class="form-group">
+            <%= form.label :description %>
+            <%= form.text_area :description, class:"form-control", rows: 3 %>
+            <p class="help-block">Insira a descrição.</p>
+            </div>
+
+            <div class="form-group">
+            <%= form.label :subject %>
+            <%= form.collection_select(:subject_id, @subjects, :id, :description, {}, {class:"form-control"}) %>
+            <p class="help-block">Selecione o assunto.</p>
+            </div>
+
+              <div id='answers'> <!-- > Equivale a task de Rails form, ver doc gem cocoon. attr aninhados. Tabela Answer !--> 
+              <%= form.fields_for :answers do |answer| %>
+                <%= render partial: "answer_fields", locals: { f: answer } %>
+              <% end %>
+              <%= link_to_add_association '[Adicionar resposta]', form, :answers %>
+              </div>
+
+            <button type="submit" class="btn btn-outline btn-primary">Salvar</button>
+            <% end %>
+          </div>    
+        
+      </div>
+    </div>
+</div>
